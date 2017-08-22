@@ -14,6 +14,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 var reservation = [];
+var waitlist = [];
 
 app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname, "home.html"));
@@ -25,11 +26,26 @@ app.get("/tables",function(req, res) {
 	res.end();
 });
 
+app.get("/api/tables",function(req, res) {
+	res.send(reservation);
+	res.end();
+});
+
+app.get("/api/waitlist",function(req, res) {
+	res.send(waitlist);
+	res.end();
+});
+
 app.post("/reserve", function(req, res) {
 	var newreserve = req.body;
-	reservation.push(newreserve);
-	console.log(newreserve);
-	console.log(reservation);
+	if (reservation.length < 5) {
+		reservation.push(newreserve);
+	}
+	else {
+		waitlist.push(newreserve);
+	};
+	console.log(waitlist.length);
+	console.log(reservation.length);
 	res.end();
 });
 
