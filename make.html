@@ -75,7 +75,7 @@
 	        unique_id: $("#id").val().trim()
 	      };
 
-	      $.post("/reserve", newReservation,function(data){
+	      $.post("/api/reserve", newReservation,function(data){
 	      	if(data)
 	      		alert("Yay you are officially booked!");
 	      	else

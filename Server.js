@@ -18,35 +18,36 @@ var waitlist = [];
 
 app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname, "home.html"));
-	res.end();
 });
 
 app.get("/tables",function(req, res) {
 	res.sendFile(path.join(__dirname, "view.html"));
-	res.end();
 });
 
 app.get("/api/tables",function(req, res) {
 	res.send(reservation);
-	res.end();
 });
 
 app.get("/api/waitlist",function(req, res) {
 	res.send(waitlist);
-	res.end();
 });
 
-app.post("/reserve", function(req, res) {
+app.get("/reserve", function(req, res) {
+	res.sendFile(path.join(__dirname, "make.html"));
+});
+
+app.post("/api/reserve", function(req, res) {
 	var newreserve = req.body;
 	if (reservation.length < 5) {
 		reservation.push(newreserve);
+		res.send(true);
 	}
 	else {
 		waitlist.push(newreserve);
+		res.send(false);
 	};
-	console.log(waitlist.length);
-	console.log(reservation.length);
-	res.end();
+	console.log("The number of persons in waitlist is: " + waitlist.length);
+	console.log("The number of persons in reservation list is: " + reservation.length);
 });
 
 app.listen(PORT, function() {
