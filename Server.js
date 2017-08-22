@@ -32,6 +32,11 @@ app.get("/api/waitlist",function(req, res) {
 	res.send(waitlist);
 });
 
+app.get("/api/view",function(req, res) {
+	var all = [reservation, waitlist];
+	res.send(all);
+});
+
 app.get("/reserve", function(req, res) {
 	res.sendFile(path.join(__dirname, "make.html"));
 });
