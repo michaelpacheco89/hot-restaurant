@@ -55,15 +55,16 @@
   // populate current reservations
 
     $.get("/api/view", function(data){
+      console.log(data);
       for(j=0;j<data.length;j++){
         for(var i = 0; i < data[j].length; i++){
            var well = $("<div class = 'well'>");
            var header = $("<h2>");
-           var span = $("<span class ="label label-primary">");
+           var span = $("<span class ='label label-primary'>");
            span.html(i+1);
 
            header.append(span);
-           header.append("| " + data[j][i].name);
+           header.append(" | " + data[j][i].name);
 
            well.append(header);
            if(j==0)
