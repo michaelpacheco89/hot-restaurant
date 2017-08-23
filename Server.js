@@ -55,7 +55,7 @@ app.post("/api/reserve", function(req, res) {
 	else {
 		waitlist.push(newreserve);
 		res.send(false);
-	};
+	}
 	console.log("The number of persons in waitlist is: " + waitlist.length);
 	console.log("The number of persons in reservation list is: " + reservation.length);
 });
