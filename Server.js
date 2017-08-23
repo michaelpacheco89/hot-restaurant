@@ -20,7 +20,12 @@ app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname, "home.html"));
 });
 
-app.get("/tables",function(req, res) {
+app.get("/tables/:clear?",function(req, res) {
+	var clear = req.params.clear;
+	if(clear){
+		reservation=[];
+		waitlist=[];
+	}
 	res.sendFile(path.join(__dirname, "view.html"));
 });
 
@@ -35,12 +40,6 @@ app.get("/api/waitlist",function(req, res) {
 app.get("/api/view",function(req, res) {
 	var all = [reservation, waitlist];
 	res.send(all);
-});
-
-app.get("/clear",function(req, res) {
-	reservation=[];
-	waitlist=[];
-	res.sendFile(path.join(__dirname, "view.html"));
 });
 
 app.get("/reserve", function(req, res) {
